@@ -12,6 +12,8 @@ API_KEY = "3ec7e302c5eabb0234748dd6a03eedab"
 
 # Configurações do Twilio
 TWILIO_ACCOUNT_SID = 'AC1c3cd83a06e6b345e2de5c4e0fddab19'
+TWILIO_AUTH_TOKEN = 'd40485e4700d8d10c14067be28a5394e'
+TWILIO_WHATSAPP_FROM = 'whatsapp:+14155238886'
 
 def speak(text):
     engine = pyttsx3.init()
