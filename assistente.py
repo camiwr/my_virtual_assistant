@@ -141,12 +141,12 @@ def main():
             query_history.append('hora')
             response = get_current_time()
             print(f"Assistente: {response}")
-            speak(response)
+            speak(f"Agora são: {response}")
         elif choice == '1':
             query_history.append('data')
             response = get_current_data()
             print(f"Assistente: {response}")
-            speak(response)
+            speak(f"Hoje é: {response}")
         else:
             print("Opção inválida. Por favor, escolha uma opção válida.")
 
