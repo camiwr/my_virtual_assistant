@@ -10,7 +10,8 @@ wikipedia.set_lang("pt")
 # Chave de API para o OpenWeatherMap
 API_KEY = "3ec7e302c5eabb0234748dd6a03eedab"
 
-
+# Configurações do Twilio
+TWILIO_ACCOUNT_SID = 'AC1c3cd83a06e6b345e2de5c4e0fddab19'
 
 def speak(text):
     engine = pyttsx3.init()
@@ -46,6 +47,27 @@ def get_weather(city):
         return f"Atualmente, em {city}, está {weather_desc} com temperatura de {temp}°C."
     else:
         return "Desculpe, não consegui encontrar informações sobre o clima dessa cidade."
+
+def send_whatsapp_message(to, message):
+    #Envia uma mensagem de WhatsApp usando a API Twilio
+    client = Client(TWILIO_ACCOUNT_SID, TWILIO_AUTH_TOKEN)
+    message = client.messages.create(
+        body=message,
+        from_=TWILIO_WHATSAPP_FROM,
+        to=f'whatsapp:{to}'
+    )
+    return message.sid
+
+def handle_reminder():
+    #Gerencia a adição e envio de lembretes
+    try:
+        reminder = input("Digite o lembrete: ")
+        print("\nO lembrete sera enviado via whatsapp")
+        to = input("\nDigite o número de telefone (com código do país, ex: +55XXXXXXXXXX): ")
+        send_whatsapp_message(to, reminder)
+        print("Lembrete enviado via WhatsApp.")
+    except Exception as e:
+        print(f"Erro ao gerenciar lembrete: {e}")
 
 def respond_to_query(query):
     # Responde a consulta do usuário.
